@@ -20,4 +20,4 @@ header = wad_header.read(data)
 
 for index in range(header.numentries):
     entry = wad_entry.read(data, header.diroffset, 32 * index)
-    print(f"{entry.name} type: {entry.type}")
+    print(f"{entry.name}")
