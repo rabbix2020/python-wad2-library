@@ -1,6 +1,7 @@
 from wad2 import wad2
-
 import sys
+
+## get WAD2 file from arguments
 
 filename = ""
 if len(sys.argv) > 1:	filename = sys.argv[1]
@@ -13,4 +14,7 @@ file.close()
 
 file = wad2.read(data)
 
-print(file.entries)
+entries = list(file.entries.keys())
+
+for entry_name in entries:
+    print(entry_name)
