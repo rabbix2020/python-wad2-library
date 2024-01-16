@@ -1,5 +1,4 @@
-from wad_entry import wad_entry
-from wad_header import wad_header
+from wad2 import wad2
 
 import sys
 
@@ -10,14 +9,8 @@ file = open(filename, "rb")
 data = file.read()
 file.close()
 
-## The WAD2 file header
+## The WAD2 file
 
-header = wad_header()
+file = wad2.read(data)
 
-header = wad_header.read(data)
-
-## The WAD directory
-
-for index in range(header.numentries):
-    entry = wad_entry.read(data, header.diroffset, 32 * index)
-    print(f"{entry.name}")
+print(file.entries)
