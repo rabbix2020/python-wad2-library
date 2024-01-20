@@ -12,9 +12,12 @@ file.close()
 
 ## The WAD2 file
 
-file = wad2.read(data)
+file = wad2()
+file = file.read(data)
 
-entries = list(file.entries.keys())
+for entry_name in file.entries:
+    entry = file.entries[entry_name]
 
-for entry_name in entries:
-    print(entry_name)
+victim = entry
+texture_data = file.read_texture(data=data, entry=victim, texture_size=16*16-1)
+print(texture_data[0])
