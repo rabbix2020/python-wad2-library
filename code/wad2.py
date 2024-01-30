@@ -2,8 +2,10 @@ from wad2_entry import wad2_entry
 from wad2_header import wad2_header
 
 import struct
+import palette
+import mip
 
-class wad2:
+class wad2_file:
       def __init__(self):
          '''
          entries is dictionary
@@ -31,7 +33,7 @@ class wad2:
          file = wad2.read(data)
          '''
 
-         file = wad2()
+         file = wad2_file()
          file.header = wad2_header.read(data)
          self.data = data
          
@@ -43,21 +45,18 @@ class wad2:
 
          return file
 
-      def read_texture(self, data, entry: wad2_entry, texture_size: int):
+      def read_texture(self, data, entry: wad2_entry) -> list:
           '''
-          you need wad2 entry and texture size (width*height-1)
-          then you will get 1D array with values that point to
-          color in palette
+          you will get 1D array with values that point to
+          color in palette, if it palette you will get
+          values of palette
           '''
-
-          if not entry.type == "D":
-            raise Exception("Sorry, now supports only mip textures")
-
-          texture = [None] * texture_size
           texture_data = data[entry.offset:entry.offset+entry.dsize]
-          texture_data = texture_data[::-1]
-          
-          for pixel in range(texture_size):
-             texture[pixel] = int().from_bytes(struct.unpack("c", texture_data[pixel:pixel+1])[0])
 
-          return texture
+          match entry.type:
+               case '@':
+                   return palette.read(texture_data)
+               case 'D':
+                   return mip.read(texture_data)
+               case _:
+                   raise Exception("Sorry, other types if not supported now")

@@ -1,4 +1,5 @@
-from wad2 import wad2
+from wad2 import wad2_file
+import struct
 import sys
 
 ## get WAD2 file from arguments
@@ -12,12 +13,5 @@ file.close()
 
 ## The WAD2 file
 
-file = wad2()
+file = wad2_file()
 file = file.read(data)
-
-for entry_name in file.entries:
-    entry = file.entries[entry_name]
-
-victim = entry
-texture_data = file.read_texture(data=data, entry=victim, texture_size=16*16-1)
-print(texture_data[0])
