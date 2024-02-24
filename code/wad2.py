@@ -1,9 +1,8 @@
 from wad2_entry import wad2_entry
 from wad2_header import wad2_header
 
-import struct
-import palette
 import mip
+import palette
 
 class wad2_file:
       def __init__(self):
@@ -13,8 +12,10 @@ class wad2_file:
          and value is entry itself
 
          header it's just wad2_header
+         data it's just data of file
          '''
 
+         self.data = None
          self.header = None
          self.entries = None
 
@@ -35,7 +36,7 @@ class wad2_file:
 
          file = wad2_file()
          file.header = wad2_header.read(data)
-         self.data = data
+         file.data = data
          
          file.entries = dict()
 
@@ -45,13 +46,12 @@ class wad2_file:
 
          return file
 
-      def read_texture(self, data, entry: wad2_entry) -> list:
+      def read_texture(self, entry: wad2_entry) -> list:
           '''
-          you will get 1D array with values that point to
-          color in palette, if it palette you will get
-          values of palette
+          in case if entry is palette you will get 1D array with all colors in this palette
+          in case if entry is mip texture will get dictionary with size and array with 4 other arrays where stores textures
           '''
-          texture_data = data[entry.offset:entry.offset+entry.dsize]
+          texture_data = self.data[entry.offset:entry.offset+entry.dsize]
 
           match entry.type:
                case '@':
