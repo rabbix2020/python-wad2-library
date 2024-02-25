@@ -15,6 +15,6 @@ file.close()
 
 file = wad2_file()
 file = file.read(data)
-victim = file.entries["sliplite"]
 
-print(file.read_texture(victim)["texture"])
+for entry in list(file.entries):
+   print(f"{entry}: {file.entries[entry].type}")

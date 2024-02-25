@@ -58,5 +58,7 @@ class wad2_file:
                    return palette.read(texture_data)
                case 'D':
                    return mip.read(texture_data)
+               case 'E':
+                   return texture_data
                case _:
                    raise Exception("Sorry, other types if not supported now")

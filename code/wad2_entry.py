@@ -11,6 +11,8 @@ class wad2_entry:
         cmprs = 0
         dummy = 0
         name = ""
+     def __str__(self):
+        return f"{self.name}"
 
      @staticmethod
      def read(data, diroffset, offset):

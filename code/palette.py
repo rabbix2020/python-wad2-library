@@ -1,7 +1,7 @@
 import struct
 
 @staticmethod
-def read(data) -> list:
+def read(data: list) -> list:
     length = int(len(data) / 3)
     lmp = []
 
