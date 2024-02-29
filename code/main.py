@@ -13,8 +13,7 @@ file.close()
 
 ## The WAD2 file
 
-file = wad2_file()
-file = file.read(data)
+file = wad2_file.read(data)
 
-for entry in list(file.entries):
-   print(f"{entry}: {file.entries[entry].type}")
+victim = file.entries["z_exit"]
+print(file.read_texture(victim))

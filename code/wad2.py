@@ -19,7 +19,7 @@ class wad2_file:
          self.header = None
          self.entries = None
 
-      def read(self, data):
+      def read(data):
          '''
          This fuction returns data
          from wad2 file.

@@ -2,16 +2,17 @@ import struct
 
 @staticmethod
 def read(data: list) -> dict:
-   texture = [None, None, None, None]
    # for some unknown reasons texture starts with name with length of 16 bytes
    texture_data = data[16:]
-   # for some unknown reasons wad2 format stores size of mip texture this way
-   size = (texture_data[0], texture_data[4])
-   texture_data = texture_data[24:]   
 
-   texture[0] = texture_data[0:size[0]*size[1]]
-   texture[1] = texture_data[size[0]*size[1]:size[0]*size[1]+(size[0]//2*size[1]//2)]
-   texture[2] = texture_data[size[0]*size[1]+(size[0]//2*size[1]//2):size[0]*size[1]+(size[0]//2*size[1]//2)+(size[0]//4*size[1]//4)]
-   texture[3] = texture_data[size[0]*size[1]+(size[0]//2*size[1]//2)+(size[0]//4*size[1]//4):size[0]*size[1]+(size[0]//2*size[1]//2)+(size[0]//4*size[1]//4)+(size[0]//8*size[1]//8)]
+   size = (struct.unpack("i", texture_data[:4])[0], struct.unpack("i", texture_data[4:8])[0])
+   texture_data = texture_data[24:]
 
-   return {"size": size, "texture": texture}
+   texture_pack = [None] * 4
+   texture_pack[0] = (size, texture_data[0:(size[0] * size[1])])
+   for quality in range(4):
+      texture_pack[quality] = (size, texture_data[0:(size[0] * size[1])])
+      texture_data = texture_data[size[0] * size[1]:]
+      size = (size[0] // 2, size[1] // 2)
+
+   return texture_pack
