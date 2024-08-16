@@ -24,11 +24,11 @@ class wad2_file:
          This fuction returns data
          from wad2 file.
          But, you need read full wad2 file
-         and give result of this
+         and you will get result of this
 
          example:
          file = open(filename, "rb")
-         self.data = file.read()
+         data = file.read()
          file.close()
 
          file = wad2.read(data)
