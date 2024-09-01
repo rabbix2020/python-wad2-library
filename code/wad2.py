@@ -7,7 +7,7 @@ import palette
 class wad2_file:
       def __init__(self):
          '''
-         entries is dictionary
+         entries is a dictionary
          where key is name of entry
          and value is entry itself
 
