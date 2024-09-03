@@ -3,11 +3,12 @@ from wad2_header import wad2_header
 
 import mip
 import palette
+import qpic
 
 class wad2_file:
       def __init__(self):
          '''
-         entries is a dictionary
+         entries is dictionary
          where key is name of entry
          and value is entry itself
 
@@ -24,11 +25,11 @@ class wad2_file:
          This fuction returns data
          from wad2 file.
          But, you need read full wad2 file
-         and you will get result of this
+         and give result of this
 
          example:
          file = open(filename, "rb")
-         data = file.read()
+         self.data = file.read()
          file.close()
 
          file = wad2.read(data)
@@ -56,6 +57,8 @@ class wad2_file:
           match entry.type:
                case '@':
                    return palette.read(texture_data)
+               case 'B':
+                   return qpic.read(texture_data)
                case 'D':
                    return mip.read(texture_data)
                case 'E':
