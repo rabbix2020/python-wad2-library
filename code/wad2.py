@@ -64,4 +64,4 @@ class wad2_file:
                case 'E':
                    return texture_data
                case _:
-                   raise Exception("Sorry, other types if not supported now")
+                   raise Exception("Sorry, other types is not supported now")
