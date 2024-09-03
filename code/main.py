@@ -1,5 +1,4 @@
 from wad2 import wad2_file
-import struct
 import sys
 
 ## get WAD2 file from arguments
@@ -15,5 +14,6 @@ file.close()
 
 file = wad2_file.read(data)
 
-victim = file.entries["z_exit"]
-print(file.read_texture(victim))
+victim = file.entries["IN_1"]
+
+print(len(file.read_texture(victim)))
