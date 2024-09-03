@@ -1,7 +1,7 @@
 import struct
 
 @staticmethod
-def read(data: list) -> dict:
+def read(data: list) -> list:
    # for some unknown reasons texture starts with name with length of 16 bytes
    texture_data = data[16:]
 
@@ -15,4 +15,4 @@ def read(data: list) -> dict:
       texture_data = texture_data[size[0] * size[1]:]
       size = (size[0] // 2, size[1] // 2)
 
-   return texture_pack
+   return list(texture_pack)
