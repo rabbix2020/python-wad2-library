@@ -12,4 +12,4 @@ def read(data: list) -> list:
        color[2] = int.from_bytes(struct.unpack("c", data[3*index+2:3*index+3])[0])
        lmp.append(color)
 
-    return lmp
+    return list(lmp)
